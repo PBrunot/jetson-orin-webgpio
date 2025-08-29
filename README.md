@@ -269,6 +269,14 @@ cd jetson-orin-webgpio
 pip install -e .[dev]
 ```
 
+## Acknowledgments
+
+This project was developed with reference to the excellent JetsonHacks article on device tree overlays:
+- **"Device Tree Overlays on Jetson - Scary but Fun"** by Jim Benson  
+- Article URL: https://jetsonhacks.com/2025/04/07/device-tree-overlays-on-jetson-scary-but-fun/
+
+The device tree overlay configuration and GPIO pin mappings are based on the comprehensive documentation and examples provided in this article.
+
 ## License
 
 This project is provided as-is for educational and development purposes.
