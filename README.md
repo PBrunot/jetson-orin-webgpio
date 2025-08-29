@@ -277,6 +277,10 @@ This project was developed with reference to the excellent JetsonHacks article o
 
 The device tree overlay configuration and GPIO pin mappings are based on the comprehensive documentation and examples provided in this article.
 
+Additional reference documentation:
+- **NVIDIA Jetson Orin NX and Orin Nano Pinmux Configuration Template**  
+- Official NVIDIA documentation for detailed pin configuration reference
+
 ## License
 
 This project is provided as-is for educational and development purposes.
