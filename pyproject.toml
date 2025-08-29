@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools-scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jetson-orin-webgpio"
+version = "1.0.0"
+description = "Web-based GPIO control interface for NVIDIA Jetson Orin development boards"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Pascal Brunot", email = "pascal@example.com"}
+]
+maintainers = [
+    {name = "Pascal Brunot", email = "pascal@example.com"}
+]
+keywords = ["jetson", "gpio", "web", "flask", "embedded", "iot"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: System :: Hardware",
+    "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
+    "Environment :: Web Environment",
+]
+requires-python = ">=3.9"
+dependencies = [
+    "flask>=3.0.0",
+    "Jetson.GPIO>=2.1.0; platform_machine=='aarch64'",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/PBrunot/jetson-orin-webgpio"
+Repository = "https://github.com/PBrunot/jetson-orin-webgpio"
+Documentation = "https://github.com/PBrunot/jetson-orin-webgpio#readme"
+Issues = "https://github.com/PBrunot/jetson-orin-webgpio/issues"
+
+[project.scripts]
+jetson-gpio-web = "jetson_orin_webgpio.app:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["jetson_orin_webgpio*"]
+
+[tool.setuptools.package-data]
+jetson_orin_webgpio = ["templates/*.html", "static/css/*.css", "static/js/*.js"]

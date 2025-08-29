@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jetson Orin Nano GPIO Controller</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Jetson Orin Nano GPIO Controller</h1>
+            <p>Control and monitor GPIO pins on your Jetson Orin</p>
+        </header>
+
+        <div class="status-bar">
+            <div id="status-message" class="status-message">Ready</div>
+            <div class="status-controls">
+                <button id="refresh-btn" class="btn btn-secondary">Refresh</button>
+                <button id="auto-refresh-toggle" class="btn btn-info">Auto-Refresh: ON</button>
+            </div>
+        </div>
+
+        <div class="gpio-container">
+            <div class="gpio-header">
+                <h2>Jetson Orin 40-Pin GPIO Header (J12)</h2>
+                <p>Physical pin layout - 2×20 connector</p>
+            </div>
+
+            <div class="pinout-diagram">
+                <div class="pinout-board">
+                    <div class="pins-left" id="pins-left">
+                        <!-- Left side pins (odd numbers 1,3,5...39) will be populated by JavaScript -->
+                    </div>
+                    <div class="board-center">
+                        <div class="board-label">Jetson Orin</div>
+                        <div class="board-sublabel">40-Pin GPIO</div>
+                    </div>
+                    <div class="pins-right" id="pins-right">
+                        <!-- Right side pins (even numbers 2,4,6...40) will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls-section">
+                <h3>GPIO Controls</h3>
+                <div id="controllable-pins" class="controllable-pins">
+                    <!-- Controllable GPIO pins will be populated here -->
+                </div>
+            </div>
+        </div>
+
+        <div class="logs">
+            <h3>Activity Log</h3>
+            <div id="log-container" class="log-container">
+                <div class="log-entry">System ready</div>
+            </div>
+            <button id="clear-log" class="btn btn-secondary">Clear Log</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

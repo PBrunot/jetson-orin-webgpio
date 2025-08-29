@@ -1,0 +1,7 @@
+include README.md
+include LICENSE
+include CLAUDE.md
+include gpio_pins.dts
+include jetsonhacks-device-tree-overlays.md
+recursive-include jetson_orin_webgpio/templates *
+recursive-include jetson_orin_webgpio/static *

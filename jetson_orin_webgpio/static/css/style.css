@@ -1,0 +1,503 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 2.5em;
+}
+
+header p {
+    color: #666;
+    font-size: 1.1em;
+}
+
+.status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.status-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.status-message {
+    font-weight: bold;
+    color: #27ae60;
+}
+
+.status-message.error {
+    color: #e74c3c;
+}
+
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #3498db;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+}
+
+.btn-secondary {
+    background-color: #95a5a6;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #7f8c8d;
+}
+
+.btn-success {
+    background-color: #27ae60;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #219a52;
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.btn-info:hover {
+    background-color: #138496;
+}
+
+.btn-warning {
+    background-color: #f39c12;
+    color: white;
+}
+
+.btn-warning:hover {
+    background-color: #e67e22;
+}
+
+.pending-change {
+    font-size: 0.8em;
+    color: #f39c12;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.gpio-container {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.gpio-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.gpio-header h2 {
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.gpio-header p {
+    color: #666;
+}
+
+/* Pinout diagram styles */
+.pinout-diagram {
+    margin: 30px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.pinout-board {
+    display: flex;
+    background: #2c3e50;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+.board-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 40px;
+    color: white;
+    min-width: 150px;
+}
+
+.board-label {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.board-sublabel {
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+.pins-left, .pins-right {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pin {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.85em;
+    font-weight: bold;
+    min-width: 140px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.pin:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.pin.power {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+}
+
+.pin.ground {
+    background: linear-gradient(135deg, #34495e, #2c3e50);
+    color: white;
+}
+
+.pin.gpio {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+}
+
+.pin.gpio.controllable {
+    background: linear-gradient(135deg, #27ae60, #219a52);
+    border: 2px solid #f1c40f;
+}
+
+.pin.gpio.not-controllable {
+    background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+}
+
+.pin-number {
+    font-size: 1em;
+    font-weight: bold;
+    margin-right: 8px;
+    min-width: 20px;
+}
+
+.pin-label {
+    flex: 1;
+    font-size: 0.8em;
+    text-align: left;
+}
+
+.pin-gpio-num {
+    font-size: 0.7em;
+    opacity: 0.8;
+    margin-left: 5px;
+}
+
+/* Controls section */
+.controls-section {
+    margin-top: 40px;
+}
+
+.controls-section h3 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.controllable-pins {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.pin-card {
+    background: #f8f9fa;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    padding: 15px;
+    transition: all 0.3s ease;
+}
+
+.pin-card:hover {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.pin-card.gpio {
+    border-color: #3498db;
+}
+
+.pin-card.power {
+    border-color: #e74c3c;
+    background: #ffeaa7;
+}
+
+.pin-card.ground {
+    border-color: #2c3e50;
+    background: #ddd;
+}
+
+.pin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.pin-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.pin-number {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.pin-label {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.pin-bcm {
+    font-size: 0.8em;
+    color: #888;
+}
+
+.pin-state {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-align: center;
+    min-width: 60px;
+}
+
+.pin-state.high {
+    background-color: #27ae60;
+    color: white;
+}
+
+.pin-state.low {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.pin-state.input {
+    background-color: #3498db;
+    color: white;
+}
+
+.pin-state.output {
+    background-color: #f39c12;
+    color: white;
+}
+
+.pin-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+.direction-select {
+    padding: 4px 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.pin-controls .btn {
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+.logs {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.logs h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.log-container {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 15px;
+    height: 200px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+.log-entry {
+    margin-bottom: 5px;
+    padding: 2px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.log-entry:last-child {
+    border-bottom: none;
+}
+
+.log-entry.error {
+    color: #e74c3c;
+}
+
+.log-entry.success {
+    color: #27ae60;
+}
+
+.log-entry.info {
+    color: #3498db;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .controllable-pins {
+        grid-template-columns: 1fr;
+    }
+    
+    .status-bar {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .status-controls {
+        justify-content: center;
+    }
+    
+    .pin-controls {
+        justify-content: center;
+    }
+    
+    .pinout-board {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .board-center {
+        order: -1;
+        padding: 10px 0;
+    }
+    
+    .pins-left, .pins-right {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .pin {
+        min-width: 120px;
+    }
+}
+
+/* Disabled pin styles */
+.pin-card.disabled {
+    background: #f8f9fa;
+    border-color: #dee2e6;
+    opacity: 0.6;
+}
+
+.pin-card.disabled:hover {
+    box-shadow: none;
+}
+
+.pin-card.disabled .pin-controls button:disabled,
+.pin-card.disabled .pin-controls select:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.disabled-status {
+    color: #dc3545;
+    font-size: 0.9em;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.pin-status {
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.85em;
+}
