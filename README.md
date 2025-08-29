@@ -279,7 +279,7 @@ The device tree overlay configuration and GPIO pin mappings are based on the com
 
 Additional reference documentation:
 - **NVIDIA Jetson Orin NX and Orin Nano Pinmux Configuration Template**  
-- URL: https://developer.download.nvidia.com/assets/embedded/secure/jetson/orin_nx/docs/Jetson_Orin_NX_and_Orin_Nano_series_Pinmux_Config_Template.xlsm?__token__=exp=1756411330~hmac=55736cc8abea9ec48fe996f6df1c745866c3ab0a9db8b9fe5d183e68a177d5b8&t=eyJscyI6ImdzZW8iLCJsc2QiOiJodHRwczovL3d3dy5nb29nbGUuY29tLyJ9
+- URL: https://developer.nvidia.com/downloads/jetson-orin-nx-and-orin-nano-series-pinmux-config-template
 - Official NVIDIA documentation for detailed pin configuration reference
 
 ## License
