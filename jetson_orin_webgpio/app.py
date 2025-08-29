@@ -303,17 +303,10 @@ def read_pin(pin):
 def gpio_info():
     """Debug endpoint to show GPIO configuration details"""
     logger.info("🔍 API: /api/gpio-info - GPIO debug information")
-    try:
-        import RPi.GPIO as RPi_GPIO
-        rpi_mode = RPi_GPIO.getmode()
-        mode_map = {10: 'BOARD', 11: 'BCM', None: 'Not Set'}
-        rpi_mode_str = mode_map.get(rpi_mode, f'Unknown ({rpi_mode})')
-    except:
-        rpi_mode_str = 'RPi.GPIO not available'
     
     info = {
         'gpio_mode': 'BOARD (Physical Pin Numbers)',
-        'rpi_gpio_mode': rpi_mode_str,
+        'jetson_gpio_mode': 'BOARD',
         'total_pins': 40,
         'controllable_pins': len(gpio_controller.gpio_pins),
         'pin_mapping': {

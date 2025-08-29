@@ -10,20 +10,22 @@ This is a web-based GPIO control interface for NVIDIA Jetson Orin development bo
 
 ### Environment Setup
 ```bash
-# Install dependencies
-poetry install
+# Install from PyPI (recommended)
+pip install jetson-orin-webgpio
 
-# Activate virtual environment  
-poetry shell
-
-# Run the application
-python app.py
+# Or install from source
+pip install .
+# Or for development
+pip install -e .
 ```
 
 ### Running the Application
-- **Development server**: `python app.py` (runs on http://0.0.0.0:5000)
-- **With elevated permissions**: `sudo poetry run python app.py` (required for GPIO access)
-- The application runs in debug mode by default - disable for production deployment
+- **Console command**: `jetson-gpio-web` (PyPI install)
+- **Python module**: `python -m jetson_orin_webgpio.app`
+- **From source**: `python jetson_orin_webgpio/app.py`
+- **With elevated permissions**: `sudo jetson-gpio-web` (required for GPIO access)
+- The application runs on http://0.0.0.0:5000 and is accessible from the network
+- Debug mode enabled by default - disable for production deployment
 
 ### GPIO Testing
 The Jetson Orin Nano requires specific model environment setup:
@@ -34,17 +36,18 @@ JETSON_MODEL_NAME=JETSON_ORIN_NANO python3 -c "import Jetson.GPIO as GPIO; print
 
 ## Architecture Overview
 
-### Backend Structure (`app.py`)
+### Backend Structure (`jetson_orin_webgpio/app.py`)
 - **GPIOController class**: Central hardware abstraction managing all GPIO operations
   - `all_pins` dictionary: Complete 40-pin header mapping (physical pin → type, description, GPIO number)
-  - `gpio_pins` dictionary: Filtered controllable pins only
+  - `gpio_pins` dictionary: Filtered controllable pins only (pins 7, 15, 29, 31, 32, 33)
   - Pin state management with direction tracking and verification
 - **Flask REST API**: RESTful endpoints for pin operations (`/api/pins`, `/api/pin/<pin>/setup|write|read`)
 - **Hardware Integration**: Direct Jetson.GPIO library integration with BOARD pin numbering mode
+- **Package structure**: Installable Python package with console entry point
 
 ### Frontend Structure
-- **Single Page Application**: `templates/index.html` with dynamic content loading
-- **GPIOController class** (`static/js/app.js`): JavaScript mirror of backend controller
+- **Single Page Application**: `jetson_orin_webgpio/templates/index.html` with dynamic content loading
+- **GPIOController class** (`jetson_orin_webgpio/static/js/app.js`): JavaScript mirror of backend controller
   - Auto-refresh functionality (5-second intervals)
   - User selection tracking for pending changes
   - Real-time DOM updates for pin states
@@ -52,6 +55,7 @@ JETSON_MODEL_NAME=JETSON_ORIN_NANO python3 -c "import Jetson.GPIO as GPIO; print
   - Physical 40-pin header diagram with color-coded pin types
   - Individual pin control cards with setup/read/write operations
   - Activity logging with timestamped entries
+- **Responsive Design**: Works on desktop and mobile devices
 
 ### Pin Mapping System
 The application uses physical pin numbering (BOARD mode) with accurate Jetson Orin GPIO mappings:
@@ -89,7 +93,8 @@ The application uses physical pin numbering (BOARD mode) with accurate Jetson Or
 ### Jetson Orin Nano Compatibility
 - Requires `JETSON_MODEL_NAME='JETSON_ORIN_NANO'` environment variable
 - Uses Jetson.GPIO library (not RPi.GPIO) for hardware access
-- Pin mapping based on official JetsonHacks documentation
+- Pin mapping based on official JetsonHacks documentation and NVIDIA pinmux configuration template
+- Device tree overlay (`gpio_pins.dts`) enables specific pins for GPIO control
 
 ### GPIO Safety
 - Pin direction must be set before write operations
@@ -100,9 +105,10 @@ The application uses physical pin numbering (BOARD mode) with accurate Jetson Or
 ## Development Workflow
 
 ### Making Changes
-- **Backend modifications**: Edit `app.py`, restart application to see changes
-- **Frontend changes**: Modify files in `static/` directory, refresh browser
+- **Backend modifications**: Edit `jetson_orin_webgpio/app.py`, restart application to see changes
+- **Frontend changes**: Modify files in `jetson_orin_webgpio/static/` directory, refresh browser
 - **Pin mappings**: Update `all_pins` dictionary in `GPIOController.__init__`
+- **Package updates**: Re-install package after changes: `pip install -e .`
 
 ### Testing Changes
 - Use individual pin controls in web interface
@@ -121,3 +127,23 @@ All endpoints return JSON with consistent structure:
   "physical_pin": number
 }
 ```
+
+## Documentation References
+
+### Official NVIDIA Documentation
+- **NVIDIA Jetson Orin NX and Orin Nano Pinmux Configuration Template**: 
+  https://developer.nvidia.com/downloads/jetson-orin-nx-and-orin-nano-series-pinmux-config-template
+- Provides comprehensive pin configuration details and GPIO mapping reference
+
+### Community Resources
+- **JetsonHacks Article**: "Device Tree Overlays on Jetson - Scary but Fun"
+  https://jetsonhacks.com/2025/04/07/device-tree-overlays-on-jetson-scary-but-fun/
+- Excellent resource for understanding device tree overlay configuration
+
+## Recent Updates
+
+### Version History
+- **Current**: Package-based installation with PyPI distribution
+- **Features**: 6 controllable GPIO pins (7, 15, 29, 31, 32, 33)
+- **Documentation**: Updated NVIDIA pinmux documentation links
+- **Compatibility**: Tested on Jetson Orin Nano Developer Kit
